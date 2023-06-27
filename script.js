@@ -15,6 +15,24 @@ const createMarkdownFromQuestion = () => {
     sampleTestcases.push({ input, output, explanation });
   });
 
+  // replace multiple \n with some unique string
+  problemStatement = problemStatement.replace(/\n{2,}/g, "~~~");
+  inputFormat = inputFormat.replace(/\n{2,}/g, "~~~");
+  outputFormat = outputFormat.replace(/\n{2,}/g, "~~~");
+  constraints = constraints.replace(/\n{2,}/g, "~~~");
+
+  // replace single \n with <br>
+  problemStatement = problemStatement.replace(/\n/g, "<br>");
+  inputFormat = inputFormat.replace(/\n/g, "<br>");
+  outputFormat = outputFormat.replace(/\n/g, "<br>");
+  constraints = constraints.replace(/\n/g, "<br>");
+
+  // replace unique string with \n
+  problemStatement = problemStatement.replace(/~~~/g, "\n\n");
+  inputFormat = inputFormat.replace(/~~~/g, "\n\n");
+  outputFormat = outputFormat.replace(/~~~/g, "\n\n");
+  constraints = constraints.replace(/~~~/g, "\n\n");
+
   const markdownTemplate = `
 # ${title}
 ## Problem Statement
